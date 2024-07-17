@@ -62,7 +62,7 @@ impl Settings {
         }
 
         let kooha_saving_location = saving_location.join("Kooha");
-        self.create_saving_location(kooha_saving_location);
+        self.create_saving_location(kooha_saving_location)
     }
 
     pub fn create_saving_location(&self, saving_location: PathBuf) -> PathBuf {
@@ -74,7 +74,7 @@ impl Settings {
             );
             return glib::user_special_dir(glib::UserDirectory::Videos).unwrap_or_else(glib::home_dir);
         }
-        saving_location;
+        saving_location
     }
 
     pub fn connect_saving_location_changed(

@@ -58,31 +58,11 @@ impl Settings {
             glib::user_special_dir(glib::UserDirectory::Videos).unwrap_or_else(glib::home_dir);
 
         if !stored_saving_location.as_os_str().is_empty() {
-            // if let Err(err) = fs::create_dir_all(&stored_saving_location) {
-            //     tracing::warn!(
-            //         "Failed to create dir at `{}`: {:?}",
-            //         stored_saving_location.display(),
-            //         err
-            //     );
-            //     return saving_location;
-            // }
             return self.create_saving_location(stored_saving_location);
-            // return stored_saving_location;
         }
 
         let kooha_saving_location = saving_location.join("Kooha");
-        return self.create_saving_location(kooha_saving_location);
-
-        // if let Err(err) = fs::create_dir_all(&kooha_saving_location) {
-        //     tracing::warn!(
-        //         "Failed to create dir at `{}`: {:?}",
-        //         kooha_saving_location.display(),
-        //         err
-        //     );
-        //     return saving_location;
-        // }
-
-        // kooha_saving_location
+        self.create_saving_location(kooha_saving_location);
     }
 
     pub fn create_saving_location(&self, saving_location: PathBuf) -> PathBuf {
@@ -94,7 +74,7 @@ impl Settings {
             );
             return glib::user_special_dir(glib::UserDirectory::Videos).unwrap_or_else(glib::home_dir);
         }
-        return saving_location;
+        saving_location;
     }
 
     pub fn connect_saving_location_changed(
